@@ -1,11 +1,22 @@
 import React from "react";
-import Card_edit_form from "../card_edit_form/card_edit_form";
+import CardAddForm from "../card_add_form/card_add_form";
+import CardEditForm from "../card_edit_form/card_edit_form";
 import styles from "./editor.module.css";
 
-const Editor = ({ cards }) => (
+const Editor = ({ cards, addCard, updateCard, deleteCard, FileInput }) => (
   <section className={styles.editor}>
     <h1 className={styles.title}>Card Maker</h1>
-    {cards && cards.map((card) => <Card_edit_form card={card} />)}
+    {cards &&
+      Object.keys(cards).map((key) => (
+        <CardEditForm
+          key={key}
+          FileInput={FileInput}
+          card={cards[key]}
+          updateCard={updateCard}
+          deleteCard={deleteCard}
+        />
+      ))}
+    <CardAddForm FileInput={FileInput} onAdd={addCard} />
   </section>
 );
 
